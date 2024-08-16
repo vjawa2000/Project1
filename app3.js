@@ -1,3 +1,6 @@
+// Ensure the Azure SDK script is loaded in your HTML:
+// <script src="https://cdnjs.cloudflare.com/ajax/libs/@azure/storage-blob/12.10.0/storage-blob.min.js"></script>
+
 async function handleFileUpload() {
     const fileInput = document.getElementById('fileSelect');
     const file = fileInput.files[0];
@@ -29,14 +32,20 @@ async function handleFileUpload() {
         message.textContent = "Uploading file...";
 
         // Azure Blob Storage configuration
-        const connectionString = "DefaultEndpointsProtocol=https;AccountName=jawastr1;AccountKey=skXNZ3nC3mapYiYJ2s236RF2Yr9Fp/xT9k8lUB4cKAcwvPkrE5NO8ZxCZa4poGLqZRKDaMGbB9jM+AStE2w6lg==;EndpointSuffix=core.windows.net"; // Replace with your connection string
-        const containerName = "uploadfile"; // Replace with your container name
+        const accountName = "jawastr1"; // Your storage account name
+        const accountKey = "skXNZ3nC3mapYiYJ2s236RF2Yr9Fp/xT9k8lUB4cKAcwvPkrE5NO8ZxCZa4poGLqZRKDaMGbB9jM+AStE2w6lg=="; // Your storage account key
+        const containerName = "uploadfile"; // Your container name
 
-        const { BlobServiceClient } = window.Azure.Storage.Blob;
-        const blobServiceClient = BlobServiceClient.fromConnectionString(connectionString);
+        // Create a new blob service client using the account name and key
+        const { BlobServiceClient, StorageSharedKeyCredential } = Azure.Storage.Blob;
+        const sharedKeyCredential = new StorageSharedKeyCredential(accountName, accountKey);
+        const blobServiceClient = new BlobServiceClient(
+            `https://${accountName}.blob.core.windows.net`,
+            sharedKeyCredential
+        );
+
+        // Get a container client and check if the container exists
         const containerClient = blobServiceClient.getContainerClient(containerName);
-
-        // Ensure container exists
         if (!(await containerClient.exists())) {
             throw new Error("Container does not exist.");
         }
