@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload Form</title>
+    <link rel="stylesheet" href="styles3.css"> <!-- Link the CSS file -->
+</head>
+<body>
+    <form id="uploadForm">
+        <h2>Upload File</h2>
+        <label for="fileSelect">Filename:</label>
+        <input type="file" name="photo" id="fileSelect">
+        <input type="submit" value="Upload">
+        <p><strong>Note:</strong> Only .jpg, .jpeg, .png formats allowed to a max size of 50MB.</p>
+    </form>
+    <p id="message"></p>
+
+    <!-- Azure Storage Blob SDK -->
+    <script src="https://unpkg.com/@azure/storage-blob@latest/dist/azure-storage-blob.min.js"></script>
+    <!-- Your JavaScript Module -->
+    <script type="module" src="app3.js"></script>
+</body>
+</html>
