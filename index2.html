@@ -5,21 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>File Upload Form</title>
     <link rel="stylesheet" href="styles3.css"> <!-- Link the CSS file -->
+    <script src="https://cdn.jsdelivr.net/npm/@azure/storage-blob@12.10.0/dist/azure-storage-blob.min.js"></script> <!-- Include Azure SDK -->
 </head>
 <body>
     <form id="uploadForm">
         <h2>Upload File</h2>
         <label for="fileSelect">Filename:</label>
-        <input type="file" name="photo" id="fileSelect">
-        <input type="submit" value="Upload">
+        <input type="file" name="photo" id="fileSelect" accept=".jpg,.jpeg,.png">
+        <input type="button" value="Upload" onclick="handleFileUpload()">
         <p><strong>Note:</strong> Only .jpg, .jpeg, .png formats allowed to a max size of 50MB.</p>
     </form>
     <p id="message"></p>
-
-    <!-- Azure Storage Blob SDK -->
-    <script src="https://unpkg.com/@azure/storage-blob@latest/dist/azure-storage-blob.min.js"></script>
-    
-    <!-- Your JavaScript Bundle -->
-    <script src="dist/bundle.js"></script>
-</body>
-</html>
