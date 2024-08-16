@@ -1,5 +1,4 @@
-// Ensure the Azure SDK script is loaded in your HTML:
-// <script src="https://cdnjs.cloudflare.com/ajax/libs/@azure/storage-blob/12.10.0/storage-blob.min.js"></script>
+import { BlobServiceClient, StorageSharedKeyCredential } from '@azure/storage-blob';
 
 async function handleFileUpload() {
     const fileInput = document.getElementById('fileSelect');
@@ -37,7 +36,6 @@ async function handleFileUpload() {
         const containerName = "uploadfile"; // Your container name
 
         // Create a new blob service client using the account name and key
-        const { BlobServiceClient, StorageSharedKeyCredential } = Azure.Storage.Blob;
         const sharedKeyCredential = new StorageSharedKeyCredential(accountName, accountKey);
         const blobServiceClient = new BlobServiceClient(
             `https://${accountName}.blob.core.windows.net`,
