@@ -1,3 +1,5 @@
+// app3.js
+
 import { BlobServiceClient, StorageSharedKeyCredential } from '@azure/storage-blob';
 
 async function FileUpload() {
@@ -32,30 +34,4 @@ async function FileUpload() {
 
         // Azure Blob Storage configuration
         const accountName = "jawastr1"; // Your storage account name
-        const accountKey = "skXNZ3nC3mapYiYJ2s236RF2Yr9Fp/xT9k8lUB4cKAcwvPkrE5NO8ZxCZa4poGLqZRKDaMGbB9jM+AStE2w6lg=="; // Your storage account key
-        const containerName = "uploadfile"; // Your container name
-
-        // Create a new blob service client using the account name and key
-        const sharedKeyCredential = new StorageSharedKeyCredential(accountName, accountKey);
-        const blobServiceClient = new BlobServiceClient(
-            `https://${accountName}.blob.core.windows.net`,
-            sharedKeyCredential
-        );
-
-        // Get a container client and check if the container exists
-        const containerClient = blobServiceClient.getContainerClient(containerName);
-        if (!(await containerClient.exists())) {
-            throw new Error("Container does not exist.");
-        }
-
-        // Upload the file
-        const blobName = file.name;
-        const blockBlobClient = containerClient.getBlockBlobClient(blobName);
-        await blockBlobClient.uploadBrowserData(file);
-
-        message.textContent = `File uploaded successfully: ${blobName}`;
-    } catch (error) {
-        console.error("Error uploading file:", error);
-        message.textContent = `Error uploading file: ${error.message}`;
-    }
-}
+        const accountKey = "skXNZ3nC3mapYiYJ2s236RF2Yr9Fp/xT9k8lUB4cKAcwv
