@@ -1,5 +1,3 @@
-// app3.js
-
 import { BlobServiceClient, StorageSharedKeyCredential } from '@azure/storage-blob';
 
 async function FileUpload() {
@@ -33,9 +31,9 @@ async function FileUpload() {
         message.textContent = "Uploading file...";
 
         // Azure Blob Storage configuration
-        const accountName = "jawastr1"; // Your storage account name
-        const accountKey = "skXNZ3nC3mapYiYJ2s236RF2Yr9Fp/xT9k8lUB4cKAcwvPkrE5NO8ZxCZa4poGLqZRKDaMGbB9jM+AStE2w6lg=="; // Your storage account key
-        const containerName = "uploadfile"; // Your container name
+        const accountName = "jawastr1";
+        const accountKey = "skXNZ3nC3mapYiYJ2s236RF2Yr9Fp/xT9k8lUB4cKAcwvPkrE5NO8ZxCZa4poGLqZRKDaMGbB9jM+AStE2w6lg==";
+        const containerName = "uploadfile";
 
         // Create a new blob service client using the account name and key
         const sharedKeyCredential = new StorageSharedKeyCredential(accountName, accountKey);
@@ -64,7 +62,6 @@ async function FileUpload() {
 
 // Handle file upload when the button is clicked
 function handleFileUpload() {
-    // Call the FileUpload function to handle the upload process
     FileUpload();
 }
 
