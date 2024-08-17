@@ -1,6 +1,6 @@
 import { BlobServiceClient, StorageSharedKeyCredential } from '@azure/storage-blob';
 
-async function handleFileUpload() {
+async function FileUpload() {
     const fileInput = document.getElementById('fileSelect');
     const file = fileInput.files[0];
     const message = document.getElementById('message');
