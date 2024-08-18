@@ -1,3 +1,5 @@
+import { BlobServiceClient, StorageSharedKeyCredential } from '@azure/storage-blob';
+
 async function FileUpload() {
     const fileInput = document.getElementById('fileSelect');
     const file = fileInput.files[0];
@@ -34,8 +36,8 @@ async function FileUpload() {
         const containerName = "uploadfile";
 
         // Create a new blob service client using the account name and key
-        const sharedKeyCredential = new Azure.StorageSharedKeyCredential(accountName, accountKey);
-        const blobServiceClient = new Azure.BlobServiceClient(
+        const sharedKeyCredential = new StorageSharedKeyCredential(accountName, accountKey);
+        const blobServiceClient = new BlobServiceClient(
             `https://${accountName}.blob.core.windows.net`,
             sharedKeyCredential
         );
