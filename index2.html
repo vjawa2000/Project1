@@ -5,24 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>File Upload Form</title>
     
-    <!-- Primary CDN -->
+    <!-- Include the Azure Storage Blob SDK -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/@azure/storage-blob/12.10.0/storage-blob.min.js"></script>
     
-    <!-- Fallback CDN 1 -->
-    <script>
-        if (typeof BlobServiceClient === 'undefined') {
-            document.write('<script src="https://cdn.jsdelivr.net/npm/@azure/storage-blob@12.10.0/dist/storage-blob.min.js"><\/script>');
-        }
-    </script>
-    
-    <!-- Fallback CDN 2 -->
-    <script>
-        if (typeof BlobServiceClient === 'undefined') {
-            document.write('<script src="https://unpkg.com/@azure/storage-blob@12.10.0/dist/storage-blob.min.js"><\/script>');
-        }
-    </script>
-
-    <link rel="stylesheet" href="styles3.css">
+    <link rel="stylesheet" href="styles3.css"> <!-- Link the CSS file -->
 </head>
 <body>
     <form id="uploadForm">
