@@ -3,17 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>File Upload Form</title>
+    <title>File Upload to Azure Blob Storage</title>
     <link rel="stylesheet" href="styles3.css">
 </head>
 <body>
-    <form id="uploadForm">
-        <h2>Upload File</h2>
-        <label for="fileSelect">Filename:</label>
-        <input type="file" id="fileSelect" accept=".jpg,.jpeg,.png">
-        <button type="button" id="uploadButton">Upload File</button>
-        <p><strong>Note:</strong> Only .jpg, .jpeg, .png formats allowed to a max size of 50MB.</p>
-    </form>
-    <p id="message"></p>
+    <h1>Upload a File</h1>
+    <input type="file" id="fileInput">
+    <button onclick="uploadFile()">Upload</button>
+
+    <script src="https://cdn.jsdelivr.net/npm/@azure/storage-blob@12.10.0/dist/storage-blob.min.js"></script>
+    <script src="app3.js"></script>
 </body>
 </html>
