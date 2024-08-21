@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>Upload</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/@azure/storage-blob/10.10.0/browser/azure-storage-blob.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/@azure/storage-blob/12.12.0/azure-storage-blob.min.js"></script>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.6.0.min.js"></script>
     <script type="text/javascript">
         $(document).on('change', ':file', function () {
@@ -31,9 +31,12 @@
             const containerName = 'uploadfile';
             const sasToken = 'sv=2022-11-02&ss=b&srt=sco&sp=rwdlaciytfx&se=2024-08-23T09:12:53Z&st=2024-08-21T01:12:53Z&spr=https&sig=ZcVGowalkTpnCAaZpIWhcahN2gbtAwBa5BnWjwZKCrI%3D';
             
-            const containerClient = new Azure.Storage.Blobs.ContainerClient(`${blobUri}/${containerName}?${sasToken}`);
+            // Initialize a BlobServiceClient
+            const blobServiceClient = new Azure.Storage.Blobs.BlobServiceClient(`${blobUri}?${sasToken}`);
+            const containerClient = blobServiceClient.getContainerClient(containerName);
             const file = $('#FileInput').get(0).files[0];
 
+            // Create a BlockBlobClient
             const blockBlobClient = containerClient.getBlockBlobClient(file.name);
 
             try {
