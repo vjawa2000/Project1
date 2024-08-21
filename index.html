@@ -8,11 +8,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>Upload</title>
-    <script src="https://unpkg.com/@azure/storage-blob@12.12.0/dist/azure-storage-blob.min.js"></script>
+    <script src="./node_modules/@azure/storage-blob/dist/azure-storage-blob.min.js"></script>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.6.0.min.js"></script>
     <script type="text/javascript">
         $(document).on('change', ':file', function () {
-            var input = $(this);
+            var input = $(this)
             var label = $('#BrowseInput').val(input.val().replace(/\\/g, '/').replace(/.*\//, ''));
         });
     </script>
@@ -21,34 +21,33 @@
             document.getElementById("uploadProgressBar").style.width = process + '%';
             document.getElementById("uploadProgressBar").innerHTML = process + '%';
         }
-
+    
         async function uploadBlob() {
             displayProcess(0);
             document.getElementById("uploadProgressBarContainer").classList.remove('hidden');
-
+    
             // TODO: Call API to get URL, SAS Token, Container name
             const blobUri = 'https://jawastorage1.blob.core.windows.net';
             const containerName = 'uploadfile';
             const sasToken = 'sv=2022-11-02&ss=b&srt=sco&sp=rwdlaciytfx&se=2024-08-23T09:12:53Z&st=2024-08-21T01:12:53Z&spr=https&sig=ZcVGowalkTpnCAaZpIWhcahN2gbtAwBa5BnWjwZKCrI%3D';
             
-            // Initialize a BlobServiceClient
-            const blobServiceClient = new Azure.Storage.Blobs.BlobServiceClient(`${blobUri}?${sasToken}`);
-            const containerClient = blobServiceClient.getContainerClient(containerName);
+            const containerClient = new Azure.Storage.Blobs.ContainerClient(`${blobUri}/${containerName}?${sasToken}`);
             const file = $('#FileInput').get(0).files[0];
-
-            // Create a BlockBlobClient
+    
             const blockBlobClient = containerClient.getBlockBlobClient(file.name);
-
-            try {
-                const uploadBlobResponse = await blockBlobClient.uploadBrowserData(file, {
-                    blobHTTPHeaders: { blobContentType: file.type }
-                });
+    
+            const uploadBlobResponse = await blockBlobClient.uploadBrowserData(file, {
+                blobHTTPHeaders: { blobContentType: file.type }
+            });
+    
+            if (uploadBlobResponse.error) {
+                alert('Error: ' + uploadBlobResponse.error.message);
+            } else {
                 displayProcess(100);
-            } catch (error) {
-                alert('Error: ' + error.message);
             }
         }
     </script>
+    
 </head>
 
 <body>
